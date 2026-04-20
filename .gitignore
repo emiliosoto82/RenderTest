@@ -1,0 +1,89 @@
+####################################
+# Build results
+####################################
+bin/
+obj/
+out/
+dist/
+
+####################################
+# Visual Studio / VS Code
+####################################
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+####################################
+# Logs
+####################################
+*.log
+logs/
+log/
+
+####################################
+# Temporary / cache files
+####################################
+*.tmp
+*.temp
+*.swp
+*.bak
+*.cache
+*.nupkg
+
+####################################
+# OS generated files
+####################################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+####################################
+# SQL Server
+####################################
+*.mdf
+*.ldf
+*.ndf
+
+####################################
+# Azure Data Factory
+####################################
+__pycache__/
+*.pyc
+
+####################################
+# Environment / secrets
+####################################
+.env
+.env.*
+secrets.json
+appsettings.local.json
+appsettings.Development.json
+
+####################################
+# Node / npm (si aplica)
+####################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+####################################
+# Test results
+####################################
+TestResults/
+coverage/
+*.trx
+
+####################################
+# Rider / IntelliJ (por si acaso)
+####################################
+.idea/
+*.iml
