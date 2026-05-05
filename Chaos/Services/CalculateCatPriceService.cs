@@ -5,41 +5,39 @@ using Chaos.Api.Services.Interfaces;
 
 namespace Chaos.Api.Services
 {
-    public class CalculateDogPriceService : CalculateAnimalPriceInterface<DogRequest, DogResponse>
+    public class CalculateCatPriceService : CalculateAnimalPriceInterface<CatRequest, CatResponse>
     {
-        
 
-        public DogResponse CalculatePrice(DogRequest request)
+        public CatResponse CalculatePrice(CatRequest request)
         {
             float price;
-            switch (request.BreedType)
+            switch(request.BreedType)
             {
-                case DogBreed.Labrador:
+                case CatBreed.MaineCoon:
                     price = 1000 - (request.Age * 50);
                     break;
-                case DogBreed.Poodle:
+                case CatBreed.Siamese:
                     price = 1200 - (request.Age * 60);
                     break;
-                case DogBreed.Boxer:
+                case CatBreed.Bengal:
                     price = 1100 - (request.Age * 40);
                     break;
-                case DogBreed.Beagle:
+                case CatBreed.Sphynx:
                     price = 900 - (request.Age * 30);
                     break;
-                case DogBreed.Bulldog:
+                case CatBreed.Persian:
                     price = 1200 - (request.Age * 80);
                     break;
                 default:
                     price = 0;
                     break;
-            }
-            ;
+            };
 
-            return new DogResponse
+            return new CatResponse
             {
                 Name = request.Name,
                 Age = request.Age,
-                AnimalType = AnimalEnum.Dog,
+                AnimalType = AnimalEnum.Cat,
                 Breed = request.BreedType.ToString(),
                 Price = price
             };

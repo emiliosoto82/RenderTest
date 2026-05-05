@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "Chaos.Api.Controllers.AnimalController",
+    "Method": "CalculateCatPrice",
+    "RelativePath": "api/animals/cat",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Chaos.Api.Models.Request.CatRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Chaos.Api.Controllers.AnimalController",
     "Method": "CalculateDogPrice",
     "RelativePath": "api/animals/dog",
     "HttpMethod": "POST",

@@ -18,8 +18,8 @@ builder.Services.AddControllers()
     });
 
 // Register the price calculation service for dependency injection
-builder.Services.AddScoped<CalculateAnimalPriceInterface<DogRequest, DogResponse>, DogPriceService>();
-
+builder.Services.AddScoped<CalculateAnimalPriceInterface<DogRequest, DogResponse>, CalculateDogPriceService>();
+builder.Services.AddScoped<CalculateAnimalPriceInterface<CatRequest, CatResponse>, CalculateCatPriceService>();
 
 var app = builder.Build();
 

@@ -5,6 +5,7 @@
         Siamese,
         Persian,
         MaineCoon,
-        R
+        Bengal,
+        Sphynx
     }
 }

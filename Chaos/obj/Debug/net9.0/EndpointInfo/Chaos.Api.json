@@ -36,6 +36,37 @@
         }
       }
     },
+    "/api/animals/cat": {
+      "post": {
+        "tags": [
+          "Animal"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "tags": [
@@ -95,16 +126,32 @@
   },
   "components": {
     "schemas": {
-      "AnimalEnum": {
+      "CatBreed": {
         "enum": [
-          "Dog",
-          "Cat",
-          "Rabbit",
-          "Parrot",
-          "Crocodile",
-          "Monkey"
+          "Siamese",
+          "Persian",
+          "MaineCoon",
+          "Bengal",
+          "Sphynx"
         ],
         "type": "string"
+      },
+      "CatRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "breedType": {
+            "$ref": "#/components/schemas/CatBreed"
+          }
+        },
+        "additionalProperties": false
       },
       "DogBreed": {
         "enum": [
@@ -126,9 +173,6 @@
           "age": {
             "type": "integer",
             "format": "int32"
-          },
-          "animalType": {
-            "$ref": "#/components/schemas/AnimalEnum"
           },
           "breedType": {
             "$ref": "#/components/schemas/DogBreed"

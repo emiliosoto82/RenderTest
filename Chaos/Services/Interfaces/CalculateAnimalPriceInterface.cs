@@ -7,6 +7,6 @@ namespace Chaos.Api.Services.Interfaces
         where TRequest : AnimalRequest 
         where TResponse : AnimalResponse
     {
-            TResponse CalculateDogPrice(TRequest request);
+            TResponse CalculatePrice(TRequest request);
     }
 }

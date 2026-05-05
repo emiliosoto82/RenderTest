@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chaos.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57678c9744de67ee5b6eb83835cc34409244b4e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1bb756f0b47aeab8fdd6027f70bcc0e3e3701304")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chaos.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chaos.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

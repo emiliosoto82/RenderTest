@@ -6,7 +6,6 @@ namespace Chaos.Api.Models.Response
     {
         public string Name { get; set; } = string.Empty;
         public int Age { get; set; }
-        public AnimalEnum AnimalType { get; set; }
         public float Price { get; set; }
     }
 }
