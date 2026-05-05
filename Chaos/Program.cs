@@ -8,6 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 // Configure JSON serialization to use string representation for enums
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -20,15 +30,19 @@ builder.Services.AddControllers()
 // Register the price calculation service for dependency injection
 builder.Services.AddScoped<CalculateAnimalPriceInterface<DogRequest, DogResponse>, CalculateDogPriceService>();
 builder.Services.AddScoped<CalculateAnimalPriceInterface<CatRequest, CatResponse>, CalculateCatPriceService>();
+builder.Services.AddScoped<CalculateAnimalPriceInterface<MonkeyRequest, MonkeyResponse>, CalculateMonkeyPriceService>();
+builder.Services.AddScoped<CalculateAnimalPriceInterface<RabbitRequest, RabbitResponse>, CalculateRabbitPriceService>();
+builder.Services.AddScoped<CalculateAnimalPriceInterface<ParrotRequest, ParrotResponse>, CalculateParrotPriceService>();
 
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAll");
 
 app.MapGet("/health", () =>
 {
@@ -59,7 +73,7 @@ app.MapPost("/status", (StatusResponse input) =>
     return Results.Ok(input);
 });
 
-// Map controller routes for handling dog price calculations and other endpoints
+// Map controller routes for handling price calculations and endpoints
 app.MapControllers();
 
 app.Run();
