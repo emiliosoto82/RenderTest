@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\z004nwhy\\Source\\Repos\\Chaos-Api\\Chaos\\Chaos.Api.csproj": {}
+    "C:\\Users\\z00599aj\\Documents\\Caos\\Chaos\\Chaos.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\z004nwhy\\Source\\Repos\\Chaos-Api\\Chaos\\Chaos.Api.csproj": {
+    "C:\\Users\\z00599aj\\Documents\\Caos\\Chaos\\Chaos.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\z004nwhy\\Source\\Repos\\Chaos-Api\\Chaos\\Chaos.Api.csproj",
+        "projectUniqueName": "C:\\Users\\z00599aj\\Documents\\Caos\\Chaos\\Chaos.Api.csproj",
         "projectName": "Chaos.Api",
-        "projectPath": "C:\\Users\\z004nwhy\\Source\\Repos\\Chaos-Api\\Chaos\\Chaos.Api.csproj",
-        "packagesPath": "C:\\Users\\z004nwhy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\z004nwhy\\Source\\Repos\\Chaos-Api\\Chaos\\obj\\",
+        "projectPath": "C:\\Users\\z00599aj\\Documents\\Caos\\Chaos\\Chaos.Api.csproj",
+        "packagesPath": "C:\\Users\\z00599aj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\z00599aj\\Documents\\Caos\\Chaos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\z004nwhy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\z00599aj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

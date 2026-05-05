@@ -67,6 +67,10 @@
             "type": "string",
             "nullable": true
           },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
           "updatedAt": {
             "type": "string",
             "format": "date-time"

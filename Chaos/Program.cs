@@ -38,6 +38,7 @@ app.MapGet("/status", () =>
 app.MapPost("/status", (StatusResponse input) =>
 {
     input.UpdatedAt = DateTime.UtcNow;
+    input.Path = "/Path";
     return Results.Ok(input);
 });
 
