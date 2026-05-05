@@ -1,0 +1,119 @@
+﻿# ============================================================
+#   .gitignore para proyecto .NET Web API
+# ============================================================
+
+# ---------------------------
+# Archivos de compilación
+# ---------------------------
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# ---------------------------
+# Visual Studio
+# ---------------------------
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vscode/
+
+# ---------------------------
+# Archivos de proyecto generados
+# ---------------------------
+*.csproj.user
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ---------------------------
+# NuGet
+# ---------------------------
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+!packages/build/
+nuget.exe
+
+# ---------------------------
+# Publicación / Deploy
+# ---------------------------
+**/publish/
+**/PublishProfiles/
+*.pubxml
+*.pubxml.user
+*.azurePubxml
+
+# ---------------------------
+# Entity Framework / Migraciones generadas
+# ---------------------------
+# (Descomenta si no quieres versionar migraciones)
+# Migrations/
+
+# ---------------------------
+# Archivos de entorno y secretos
+# ---------------------------
+.env
+.env.*
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+**/secrets.json
+
+# ---------------------------
+# Archivos de pruebas / cobertura
+# ---------------------------
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.trx
+
+# ---------------------------
+# Docker
+# ---------------------------
+# (Comenta si usas Docker y quieres versionar estos archivos)
+# docker-compose.override.yml
+
+# ---------------------------
+# Rider (JetBrains)
+# ---------------------------
+.idea/
+*.sln.iml
+
+# ---------------------------
+# macOS
+# ---------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ---------------------------
+# Windows
+# ---------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------------------------
+# Linux
+# ---------------------------
+*~
+
+# ---------------------------
+# Node (si usas frontend integrado)
+# ---------------------------
+node_modules/
+npm-debug.log*
+yarn-error.log*
