@@ -1,4 +1,4 @@
-﻿namespace Chaos.Api.Models;
+﻿namespace Chaos.Api.Models.Response;
 
 public class StatusResponse
 {

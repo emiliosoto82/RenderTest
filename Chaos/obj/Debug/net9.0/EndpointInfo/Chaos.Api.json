@@ -5,6 +5,37 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/animals/dog": {
+      "post": {
+        "tags": [
+          "Animal"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DogRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DogRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DogRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "tags": [
@@ -48,10 +79,63 @@
           }
         }
       }
+    },
+    "/Health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AnimalEnum": {
+        "enum": [
+          "Dog",
+          "Cat",
+          "Rabbit",
+          "Parrot",
+          "Crocodile",
+          "Monkey"
+        ],
+        "type": "string"
+      },
+      "DogBreed": {
+        "enum": [
+          "Labrador",
+          "Poodle",
+          "Boxer",
+          "Beagle",
+          "Bulldog"
+        ],
+        "type": "string"
+      },
+      "DogRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "animalType": {
+            "$ref": "#/components/schemas/AnimalEnum"
+          },
+          "breedType": {
+            "$ref": "#/components/schemas/DogBreed"
+          }
+        },
+        "additionalProperties": false
+      },
       "StatusResponse": {
         "type": "object",
         "properties": {
@@ -82,7 +166,13 @@
   },
   "tags": [
     {
+      "name": "Animal"
+    },
+    {
       "name": "Chaos.Api"
+    },
+    {
+      "name": "Health"
     }
   ]
 }
