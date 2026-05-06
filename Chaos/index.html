@@ -89,7 +89,7 @@
             }
         }
 
-        /* ✅ NUEVO: Banner de advertencia de puerto */
+        /* Banner de advertencia */
         .port-warning {
             display: none;
             background: #fff8e1;
@@ -109,6 +109,28 @@
                 display: block;
                 margin-bottom: 4px;
                 color: #e65100;
+            }
+
+        /* Banner de aviso de cold start */
+        .coldstart-warning {
+            display: none;
+            background: #e8f4fd;
+            border: 1px solid #2196F3;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #1565C0;
+        }
+
+            .coldstart-warning.active {
+                display: block;
+            }
+
+            .coldstart-warning strong {
+                display: block;
+                margin-bottom: 4px;
+                color: #0d47a1;
             }
 
         .animal-selector {
@@ -310,11 +332,18 @@
             </div>
         </div>
 
-        <!-- ✅ NUEVO: Aviso si el puerto no responde -->
+        <!-- Aviso de cold start de Render -->
+        <div class="coldstart-warning" id="coldstart-warning">
+            <strong>🧊 API en modo reposo (Cold Start)</strong>
+            Render apaga los servicios gratuitos tras 15 min de inactividad.
+            La primera solicitud puede tardar <strong>30–60 segundos</strong> en despertar la API. ¡Ten paciencia! ☕
+        </div>
+
+        <!-- Aviso si la API no responde -->
         <div class="port-warning" id="port-warning">
             <strong>⚠️ No se pudo conectar con la API</strong>
-            Verifica que tu proyecto .NET esté corriendo y que el puerto en el HTML coincida con
-            el de <code>launchSettings.json</code>. Puerto actual: <span id="current-port"></span>
+            Verifica que el servicio en Render esté activo:
+            <a href="https://rendertest-c7r1.onrender.com/" target="_blank">rendertest-c7r1.onrender.com</a>
         </div>
 
         <div class="animal-selector">
@@ -411,7 +440,7 @@
         </form>
 
         <div class="loading" id="loading">
-            <span class="spinner"></span>Calculating price...
+            <span class="spinner"></span><span id="loading-text">Calculating price...</span>
         </div>
 
         <div class="response" id="response">
@@ -421,15 +450,13 @@
     </div>
 
     <script>
-
-        const PORT = 5254;
-        const API_BASE_URL = `http://localhost:${PORT}/api/animals`;
-
-        const FALLBACK_PORTS = [5000, 5001, 7000, 7101, 8080];
+        // ✅ Apunta directamente a la API desplegada en Render
+        const API_BASE_URL = 'https://rendertest-c7r1.onrender.com/api/animals';
+        const HEALTH_URL = 'https://rendertest-c7r1.onrender.com/health';
 
         let currentAnimal = 'dog';
-        let activeBaseUrl = API_BASE_URL;
 
+        // ── Selector de animal ────────────────────────────────────────────────
         document.querySelectorAll('.animal-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.animal-btn').forEach(b => b.classList.remove('active'));
@@ -441,6 +468,7 @@
             });
         });
 
+        // ── Submit de formularios ─────────────────────────────────────────────
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -462,10 +490,10 @@
             const payload = { name, breed, age };
 
             try {
-                showLoading(true);
+                showLoading(true, 'Calculating price...');
                 disableForms(true);
 
-                const response = await fetch(`${activeBaseUrl}/${animal}`, {
+                const response = await fetch(`${API_BASE_URL}/${animal}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -488,7 +516,7 @@
 
             } catch (error) {
                 const msg = error.message.includes('Failed to fetch')
-                    ? `Could not connect to the API on port ${PORT}. Make sure your .NET project is running.`
+                    ? '⚠️ Could not connect to the API. It may be waking up from sleep — wait 30s and try again.'
                     : error.message;
                 displayResponse({ error: msg }, false);
             } finally {
@@ -497,8 +525,9 @@
             }
         }
 
-        function showLoading(show) {
+        function showLoading(show, text = 'Calculating price...') {
             document.getElementById('loading').classList.toggle('active', show);
+            document.getElementById('loading-text').textContent = text;
         }
 
         function disableForms(disabled) {
@@ -533,67 +562,46 @@
 
         function buildItem(label, value) {
             return `<div class="response-item">
-                        <strong>${label}:</strong>
-                        <span>${value}</span>
-                    </div>`;
+                            <strong>${label}:</strong>
+                            <span>${value}</span>
+                        </div>`;
         }
 
-        // ─── Health check con auto-detección de puerto ────────────────────────────
-        async function checkPort(port) {
-            const urlsToTry = [
-                `http://localhost:${port}/health`,
-                `http://localhost:${port}/api/animals`
-            ];
-
-            for (const url of urlsToTry) {
-                try {
-                    const res = await fetch(url, {
-                        signal: AbortSignal.timeout(2000),
-                        method: 'GET'
-                    });
-                    // Cualquier respuesta del servidor (incluso 404/405) significa que la API está viva
-                    if (res.status < 500) return true;
-                } catch (_) { }
-            }
-            return false;
-        }
-
+        // ── Health check al cargar ────────────────────────────────────────────
         window.addEventListener('load', async () => {
             const dot = document.getElementById('api-dot');
             const statusText = document.getElementById('api-status-text');
             const warning = document.getElementById('port-warning');
+            const coldstart = document.getElementById('coldstart-warning');
 
-            document.getElementById('current-port').textContent = PORT;
+            // Muestra aviso de cold start mientras verifica
+            coldstart.classList.add('active');
+            statusText.textContent = 'Waking up API...';
 
-            // 1️⃣ Prueba el puerto configurado primero
-            const mainOnline = await checkPort(PORT);
+            try {
+                // Timeout generoso (15s) por si está en cold start
+                const res = await fetch(HEALTH_URL, {
+                    signal: AbortSignal.timeout(15000),
+                    method: 'GET'
+                });
 
-            if (mainOnline) {
-                dot.classList.remove('checking');
-                dot.classList.add('online');
-                statusText.textContent = `API Online ✓ (port ${PORT})`;
-                return;
-            }
+                coldstart.classList.remove('active');
 
-            // 2️⃣ Si falla, prueba puertos alternativos automáticamente
-            statusText.textContent = 'Scanning ports...';
-            for (const port of FALLBACK_PORTS) {
-                if (port === PORT) continue;
-                const found = await checkPort(port);
-                if (found) {
-                    activeBaseUrl = `http://localhost:${port}/api/animals`;
+                if (res.status < 500) {
                     dot.classList.remove('checking');
                     dot.classList.add('online');
-                    statusText.textContent = `API Online ✓ (port ${port} — update PORT to ${port})`;
-                    return;
+                    statusText.textContent = '✓ API Online — rendertest-c7r1.onrender.com';
+                } else {
+                    throw new Error(`Status ${res.status}`);
                 }
-            }
 
-            // 3️⃣ Ningún puerto respondió
-            dot.classList.remove('checking');
-            dot.classList.add('offline');
-            statusText.textContent = 'API Offline — start your .NET project';
-            warning.classList.add('active');
+            } catch (_) {
+                coldstart.classList.remove('active');
+                dot.classList.remove('checking');
+                dot.classList.add('offline');
+                statusText.textContent = '✗ API Offline or still waking up';
+                warning.classList.add('active');
+            }
         });
     </script>
 </body>

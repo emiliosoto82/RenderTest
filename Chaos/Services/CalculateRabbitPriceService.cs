@@ -14,16 +14,16 @@ namespace Chaos.Api.Services
             switch(request.BreedType)
             {
                 case RabbitBreed.HollandLop:
-                    price = 1000 - (request.Age * 50);
+                    price = 700 - (request.Age * 5);
                     break;
                 case RabbitBreed.NetherlandDwarf:
-                    price = 1200 - (request.Age * 60);
+                    price = 400 - (request.Age * 3);
                     break;
                 case RabbitBreed.Lionhead:
-                    price = 1100 - (request.Age * 40);
+                    price = 500 - (request.Age * 2);
                     break;
                 case RabbitBreed.MiniRex:
-                    price = 900 - (request.Age * 30);
+                    price = 30 - (request.Age * 1);
                     break;
                
                 default:

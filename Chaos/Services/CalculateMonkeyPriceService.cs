@@ -14,16 +14,16 @@ namespace Chaos.Api.Services
             switch(request.BreedType)
             {
                 case MonkeyBreed.Capuchin:
-                    price = 1000 - (request.Age * 50);
+                    price = 5000 - (request.Age * 5);
                     break;
                 case MonkeyBreed.Howler:
-                    price = 1200 - (request.Age * 60);
+                    price = 5200 - (request.Age * 10);
                     break;
                 case MonkeyBreed.Spider:
-                    price = 1100 - (request.Age * 40);
+                    price = 6100 - (request.Age * 7);
                     break;
                 case MonkeyBreed.Squirrel:
-                    price = 900 - (request.Age * 30);
+                    price = 2900 - (request.Age * 6);
                     break;
             
                 default:

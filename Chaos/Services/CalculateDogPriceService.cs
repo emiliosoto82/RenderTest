@@ -14,16 +14,16 @@ namespace Chaos.Api.Services
             switch (request.BreedType)
             {
                 case DogBreed.Labrador:
-                    price = 1000 - (request.Age * 50);
+                    price = 1300 - (request.Age * 30);
                     break;
                 case DogBreed.Poodle:
-                    price = 1200 - (request.Age * 60);
+                    price = 1240 - (request.Age * 50);
                     break;
                 case DogBreed.Boxer:
-                    price = 1100 - (request.Age * 40);
+                    price = 1402 - (request.Age * 40);
                     break;
                 case DogBreed.Beagle:
-                    price = 900 - (request.Age * 30);
+                    price = 600 - (request.Age * 50);
                     break;
                 case DogBreed.Bulldog:
                     price = 1200 - (request.Age * 80);
